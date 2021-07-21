@@ -8,6 +8,5 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun VolumeBarDisplay(volume: Int, modifier: Modifier = Modifier) {
-    // TODO Make a bar
     LinearProgressIndicator(volume.toFloat() / 100, modifier.height(45.dp))
 }
