@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
+const val UPDATE_SYS = false
 
 class VolumeViewModel(app: Application) : AndroidViewModel(app) {
     val audioManager = getApplication<Application>()
@@ -31,9 +32,13 @@ class VolumeViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun updateVolume(newVol: Int) {
+        _volume.value = newVol.also { if (UPDATE_SYS) changeSystemVolume(it) }
+    }
+
+    private fun changeSystemVolume(newVol: Int) {
         val max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
         val updateVolume = (newVol.toDouble() / 100 * max).toInt()
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, updateVolume, AudioManager.FLAG_SHOW_UI)
-        _volume.value = newVol
     }
+
 }
