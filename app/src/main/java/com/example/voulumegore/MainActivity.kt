@@ -13,10 +13,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import com.example.volumegore.ui.theme.volumeGoreTheme
 import com.example.voulumegore.RadioVolume
+import com.example.voulumegore.SevenSegment
 
 typealias VolumeChanged = (volume: Int) -> Unit
 
 class MainActivity : ComponentActivity() {
+    @ExperimentalStdlibApi
     @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +28,7 @@ class MainActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colors.background) {
                     val viewModel: VolumeViewModel by viewModels()
                     val volume by viewModel.volume.observeAsState(viewModel.getInitialVolume())
-                    RadioVolume(volume, viewModel::updateVolume)
+                    SevenSegment(volume, viewModel::updateVolume)
                 }
             }
         }
