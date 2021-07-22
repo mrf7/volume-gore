@@ -19,13 +19,7 @@ class MainActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colors.background) {
                     val viewModel: VolumeViewModel by viewModels()
                     val volume by viewModel.volume.observeAsState(viewModel.getInitialVolume())
-                    ListVolume(volume) {volume, locked ->
-                        if (locked) {
-                            // Do nothing
-                        } else {
-                            viewModel.updateVolume(volume)
-                        }
-                    }
+                    ListVolume(volume, viewModel::updateVolume)
                 }
             }
         }
