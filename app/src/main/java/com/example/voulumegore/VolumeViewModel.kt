@@ -15,7 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-const val UPDATE_SYS = false
+const val UPDATE_SYS = true
 
 class VolumeViewModel(app: Application) : AndroidViewModel(app) {
     val audioManager = getApplication<Application>()

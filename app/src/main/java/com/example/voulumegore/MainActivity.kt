@@ -1,16 +1,23 @@
 package com.example.volumegore
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import com.example.volumegore.ui.theme.volumeGoreTheme
+import com.example.voulumegore.RadioVolume
+
+typealias VolumeChanged = (volume: Int) -> Unit
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -19,7 +26,7 @@ class MainActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colors.background) {
                     val viewModel: VolumeViewModel by viewModels()
                     val volume by viewModel.volume.observeAsState(viewModel.getInitialVolume())
-                    ListVolume(volume, viewModel::updateVolume)
+                    RadioVolume(volume, viewModel::updateVolume)
                 }
             }
         }

@@ -41,12 +41,11 @@ import com.example.volumegore.ui.theme.volumeGoreTheme
 
 /**
  * Compose implementation of [This idea](https://www.reddit.com/r/ProgrammerHumor/comments/8zibwm/new_mobile_phone_volume_control/)
- * without the paywall ui
  */
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ListVolume(currentVolume: Int, onVolumeSelected: (volume: Int) -> Unit) {
+fun ListVolume(currentVolume: Int, onVolumeSelected: VolumeChanged) {
     val listState = rememberLazyListState(currentVolume)
     val showPaywall = remember { mutableStateOf(false) }
     if (showPaywall.value) {
@@ -93,7 +92,7 @@ private fun VolumeList(
                     .background(Color.White)
             )
         }
-        items(List(101) { it }) {
+        items(101) {
             val locked = it % 2 == 0 || it % 5 == 0
             Box(modifier = Modifier
                 .clickable { onVolumeSelected(it, locked) }
