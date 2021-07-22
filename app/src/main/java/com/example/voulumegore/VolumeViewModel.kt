@@ -1,4 +1,4 @@
-package com.example.voulumegore
+package com.example.volumegore
 
 import android.app.Application
 import android.content.Context

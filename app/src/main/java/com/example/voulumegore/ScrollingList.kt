@@ -1,4 +1,4 @@
-package com.example.voulumegore
+package com.example.volumegore
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -32,7 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.voulumegore.ui.theme.VoulumeGoreTheme
+import com.example.volumegore.ui.theme.volumeGoreTheme
 
 /**
  * Compose implementation of [This idea](https://www.reddit.com/r/ProgrammerHumor/comments/8zibwm/new_mobile_phone_volume_control/)
@@ -86,7 +86,7 @@ private fun VolumeSelectRow(level: Int, locked: Boolean = false) {
 @Preview
 @Composable
 fun ListVolumePreview() {
-    VoulumeGoreTheme {
+    volumeGoreTheme {
         Surface(color = MaterialTheme.colors.background) {
             ListVolume(currentVolume = 0) {_,_ ->}
         }

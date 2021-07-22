@@ -1,4 +1,4 @@
-package com.example.voulumegore.ui.theme
+package com.example.volumegore.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

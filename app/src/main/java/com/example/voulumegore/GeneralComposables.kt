@@ -1,4 +1,4 @@
-package com.example.voulumegore
+package com.example.volumegore
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.LinearProgressIndicator

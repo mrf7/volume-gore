@@ -1,4 +1,4 @@
-package com.example.voulumegore
+package com.example.volumegore
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,13 +8,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import com.example.voulumegore.ui.theme.VoulumeGoreTheme
+import com.example.volumegore.ui.theme.volumeGoreTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            VoulumeGoreTheme {
+            volumeGoreTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     val viewModel: VolumeViewModel by viewModels()

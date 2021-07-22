@@ -8,7 +8,7 @@ android {
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
-        applicationId = "com.example.voulumegore"
+        applicationId = "com.example.volumegore"
         minSdk = 21
         targetSdk = 30
         versionCode = 1

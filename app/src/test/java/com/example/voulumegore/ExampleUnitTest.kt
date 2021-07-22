@@ -1,4 +1,4 @@
-package com.example.voulumegore
+package com.example.volumegore
 
 import org.junit.Test
 
