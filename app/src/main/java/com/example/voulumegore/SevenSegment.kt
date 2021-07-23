@@ -1,6 +1,5 @@
 package com.example.voulumegore
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -10,19 +9,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
@@ -35,28 +32,26 @@ fun SevenSegment(volume: Int, volumeChanged: VolumeChanged) {
     Column {
         Row {
             val digits = volume.toString().padStart(3, '0').toCharArray().map { it.digitToInt() }
-            val states = digits.map {
+            val states: List<MutableList<Boolean>> = digits.map {
                 remember {
-                    it.toSevenSegmentStateList()
-                        .toMutableList()
-                        .map { mutableStateOf(it) }
+                    it.toSegmentList().toMutableStateList()
                 }
             }
             for (state in states) {
                 Column {
                     SevenSegmentDigit(
-                        state.map { it.value },
+                        state,
                         { index, updateState ->
-                            state[index].value = updateState
+                            state[index] = updateState
                         },
                         Modifier.padding(horizontal = 10.dp)
                     )
-                    val digit = segmentsToNums[state.map { it.value }]?.toString() ?: "ERROR"
+                    val digit = segmentsToNums[state.map { it }]?.toString() ?: "ERROR"
                     Text(digit, Modifier.align(Alignment.CenterHorizontally))
                 }
             }
 
-            val newVolDigits = states.mapNotNull { state -> segmentsToNums[state.map { it.value }] }
+            val newVolDigits = states.mapNotNull { state -> segmentsToNums[state.map { it }] }
             if (newVolDigits.size == states.size) {
                 var newVol = 0
                 for (digit in newVolDigits) {
@@ -122,13 +117,13 @@ private fun HorizontalSegment(active: Boolean, modifier: Modifier = Modifier) {
 }
 
 @ExperimentalStdlibApi
-private val numsToSegments = (0..9).associateWith { it.toSevenSegmentStateList() }
+private val numsToSegments = (0..9).associateWith { it.toSegmentList() }
 
 @ExperimentalStdlibApi
 private val segmentsToNums = numsToSegments.entries.associate { (key, value) -> value to key }
 
 @ExperimentalStdlibApi
-private fun Int.toSevenSegmentStateList(): List<Boolean> {
+private fun Int.toSegmentList(): List<Boolean> {
     return when (this) {
         0 -> {
             buildList {
@@ -223,7 +218,7 @@ private fun Int.toSevenSegmentStateList(): List<Boolean> {
 fun DigitPreview(@PreviewParameter(DigitParamProvider::class, 1) digit: Int) {
     volumeGoreTheme {
         Surface(color = MaterialTheme.colors.background) {
-            SevenSegmentDigit(digit.toSevenSegmentStateList(), { _, _ -> })
+            SevenSegmentDigit(digit.toSegmentList(), { _, _ -> })
         }
     }
 }
