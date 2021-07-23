@@ -36,9 +36,12 @@ class VolumeViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     private fun changeSystemVolume(newVol: Int) {
+        if(newVol !in 0..100) return
         val max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
         val updateVolume = (newVol.toDouble() / 100 * max).toInt()
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, updateVolume, AudioManager.FLAG_SHOW_UI)
+        if (updateVolume != audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)) {
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, updateVolume, AudioManager.FLAG_SHOW_UI)
+        }
     }
 
 }

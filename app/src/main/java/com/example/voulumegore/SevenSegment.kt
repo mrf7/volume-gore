@@ -34,9 +34,8 @@ import com.example.volumegore.ui.theme.volumeGoreTheme
 fun SevenSegment(volume: Int, volumeChanged: VolumeChanged) {
     Column {
         Row {
-            val digits = volume.toString().toCharArray().map { it.digitToInt() }
-            val digitsToDisplay = digits.takeIf { it.size > 1 } ?: listOf(0) + digits
-            val states = digitsToDisplay.map {
+            val digits = volume.toString().padStart(3, '0').toCharArray().map { it.digitToInt() }
+            val states = digits.map {
                 remember {
                     it.toSevenSegmentStateList()
                         .toMutableList()
@@ -50,7 +49,7 @@ fun SevenSegment(volume: Int, volumeChanged: VolumeChanged) {
                         { index, updateState ->
                             state[index].value = updateState
                         },
-                        Modifier.padding(horizontal = 15.dp)
+                        Modifier.padding(horizontal = 10.dp)
                     )
                     val digit = segmentsToNums[state.map { it.value }]?.toString() ?: "ERROR"
                     Text(digit, Modifier.align(Alignment.CenterHorizontally))
