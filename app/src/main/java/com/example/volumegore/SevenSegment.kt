@@ -1,4 +1,4 @@
-package com.example.voulumegore
+package com.example.volumegore
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

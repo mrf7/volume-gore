@@ -12,8 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import com.example.volumegore.ui.theme.volumeGoreTheme
-import com.example.voulumegore.RadioVolume
-import com.example.voulumegore.SevenSegment
+import com.example.volumegore.RadioVolume
+import com.example.volumegore.SevenSegment
 
 typealias VolumeChanged = (volume: Int) -> Unit
 

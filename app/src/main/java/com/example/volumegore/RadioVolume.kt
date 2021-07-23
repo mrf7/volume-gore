@@ -1,8 +1,6 @@
-package com.example.voulumegore
+package com.example.volumegore
 
-import android.inputmethodservice.Keyboard
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,10 +16,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.volumegore.ListVolume
+import androidx.compose.foundation.lazy.items
 import com.example.volumegore.VolumeBarDisplay
 import com.example.volumegore.VolumeChanged
 import com.example.volumegore.ui.theme.volumeGoreTheme
@@ -33,14 +30,20 @@ import com.example.volumegore.ui.theme.volumeGoreTheme
 @Composable
 fun RadioVolume(currentVolume: Int, onVolumeSelected: VolumeChanged) {
     Column {
-        VolumeBarDisplay(volume = currentVolume, Modifier.padding(horizontal = 10.dp, vertical = 20.dp).fillMaxWidth())
+        VolumeBarDisplay(volume = currentVolume,
+            Modifier
+                .padding(horizontal = 10.dp, vertical = 20.dp)
+                .fillMaxWidth())
         LazyVerticalGrid(
             cells = GridCells.Adaptive(60.dp),
             Modifier
                 .fillMaxSize()
         ) {
-            items(101) {
-                Row(Modifier.clickable { onVolumeSelected(it) }){
+            // This should be remembered to avoid shuffling the numbers every recomposition, but being
+            // horrible is the goal so leaving it like this
+            val numbers = List(101) { it }.shuffled()
+            items(numbers) {
+                Row(Modifier.clickable { onVolumeSelected(it) }) {
                     RadioButton(
                         selected = currentVolume == it,
                         onClick = null,
