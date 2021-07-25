@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colors.background) {
                     val viewModel: VolumeViewModel by viewModels()
                     val volume by viewModel.volume.observeAsState(viewModel.getInitialVolume())
-                    CatapultVolume(volume, viewModel::updateVolume)
+                    RadioVolume(volume, viewModel::updateVolume)
                 }
             }
         }
