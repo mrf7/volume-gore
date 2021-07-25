@@ -58,7 +58,7 @@ fun CatapultVolume(volume: Int, volumeChanged: VolumeChanged) {
         )
         val color by animateColorAsState(
             targetValue = if (charging.value) Color.Red else Color.Black,
-            if (charging.value) redToGreen else snap()
+            if (charging.value) infiniteRepeatable(redToGreen, RepeatMode.Reverse) else snap()
         )
         Text(rotate.roundToInt().toString(), Modifier.constrainAs(angle) {
             centerHorizontallyTo(image)
