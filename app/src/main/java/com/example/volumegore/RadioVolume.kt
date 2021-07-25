@@ -49,9 +49,15 @@ fun RadioVolume(currentVolume: Int, onVolumeSelected: VolumeChanged) {
                         onClick = null,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
-                    Text(
-                        it.toString(),
-                        Modifier
+//                    Text(
+//                        it.toString(),
+//                        Modifier
+//                            .padding(vertical = 10.dp)
+//                            .align(Alignment.CenterVertically)
+//                    )
+                    VolumeBarDisplay(
+                        volume = it,
+                        modifier = Modifier
                             .padding(vertical = 10.dp)
                             .align(Alignment.CenterVertically)
                     )
