@@ -1,4 +1,4 @@
-package com.example.volumegore
+package com.example.volumegore.volumescreens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

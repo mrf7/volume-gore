@@ -41,6 +41,11 @@ val redToGreen = keyframes<Color> {
     Color.Yellow at 4_000 with FastOutLinearInEasing
     Color.Red at 6_000 with FastOutLinearInEasing
 }
+
+/**
+ * Compose implementation of [This idea](https://www.reddit.com/r/ProgrammerHumor/comments/6f8ory/launch_a_90db_volume_slider_over_300_metres/)
+ * WIP havent figured out how to draw the ball on screen in the proper spot relative to the progress bar
+ */
 @Composable
 fun CatapultVolume(volume: Int, volumeChanged: VolumeChanged) {
     ConstraintLayout(
