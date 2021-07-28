@@ -20,11 +20,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import com.example.volumegore.ui.theme.volumeGoreTheme
 import com.example.volumegore.volumescreens.SevenSegment
@@ -40,43 +43,9 @@ class MainActivity : ComponentActivity() {
             volumeGoreTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    val viewModel: VolumeViewModel by viewModels()
-                    val volume by viewModel.volume.observeAsState(viewModel.getInitialVolume())
-                    var volumeControl by remember {
-                        mutableStateOf(VolumeControl.PiVolume)
-                    }
-
-                    Scaffold(topBar = {
-                        var expanded by remember { mutableStateOf(false) }
-                        TopAppBar(
-                            title = {
-                                Text(volumeControl.name)
-                            },
-                            actions = {
-                                IconButton(onClick = { expanded = !expanded }) {
-                                    Icon(Icons.Default.MoreVert, "")
-                                }
-                                DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-                                    VolumeControl.values().toList().minus(volumeControl).forEach {
-                                        DropdownMenuItem(onClick = {
-                                            expanded = false
-                                            volumeControl = it
-                                        }) {
-                                            Text(it.name)
-                                        }
-                                    }
-                                }
-                            }
-                        )
-                    }){
-                        when (volumeControl) {
-                            VolumeControl.PiVolume -> PiVolume(volume, viewModel::updateVolume)
-                            VolumeControl.RadioVolume -> RadioVolume(volume, viewModel::updateVolume)
-                            VolumeControl.ScrollingList -> ListVolume(volume, viewModel::updateVolume)
-                            VolumeControl.SevenSegment -> SevenSegment(volume, viewModel::updateVolume)
-                            VolumeControl.Catapult -> CatapultVolume(volume, viewModel::updateVolume)
-                        }
-                    }
+//                    StateOfMutableList()
+//                    ListOfMutableState()
+                    MutableStateList()
                 }
             }
         }
