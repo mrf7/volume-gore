@@ -53,7 +53,7 @@ fun CatapultVolume(volume: Int, volumeChanged: VolumeChanged) {
             .padding(vertical = 100.dp)
             .fillMaxWidth()
     ) {
-        val (image, slider, angle, ball) = createRefs()
+        val (image, slider) = createRefs()
         val charging = remember { mutableStateOf(false) }
         // infiniteRepeatable will continue to repeat until we recompose with a different animation, so switch to a tween
         // when the button is released
@@ -65,10 +65,6 @@ fun CatapultVolume(volume: Int, volumeChanged: VolumeChanged) {
             targetValue = if (charging.value) Color.Red else Color.Black,
             if (charging.value) infiniteRepeatable(redToGreen, RepeatMode.Reverse) else snap()
         )
-        Text(rotate.roundToInt().toString(), Modifier.constrainAs(angle) {
-            centerHorizontallyTo(image)
-            top.linkTo(image.bottom, 5.dp)
-        })
         Icon(
             Icons.Default.VolumeUp, "", tint = color,
             modifier = Modifier
